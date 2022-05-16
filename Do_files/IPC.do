@@ -1,3 +1,5 @@
+clear 
+
 cls
 
 /*=======================================================================
@@ -10,12 +12,12 @@ Ricardo Huapaya
 
 cd "/Users/ricardohuapaya/Documents/Projects/stochasticRich/datasets"
 
-import excel "IPC.xlsx", firstrow clear
+use ipc_data
 
-drop date
+drop if date < tm(2015m1)
 
-generate date = tm(2000m2) + _n-1
+local $inflation "ipc ipc_food ipc_tranportation"
 
-tsset date, monthly
+global opciones1 'title("Inflación Costa Rica 2015-2022")'
 
-save ipc_data, replace
+twoway tsline $inflation , title("Inflación Costa Rica 2015-2022")
