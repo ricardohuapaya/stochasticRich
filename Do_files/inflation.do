@@ -33,7 +33,7 @@ clear
 use "datasets/ipc_data.dta", clear
 
 
-local inflation ipc ipc_food ipc_transp
+local inflation ipc_food ipc_transp
 
 
 keep ipc ipc_food ipc_transp date
@@ -57,6 +57,19 @@ local optiontitles "place(nwest) al(top) j(left)"
 
 local colorsrich "10 17 40" "18 130 162" "187 62 3"
 
+tsline ipc, ///
+         title("Índice de Precios Costa Rica", `optiontitles') ///
+         subtitle("Variación Interanual (%), 2015-2022", `optiontitles') ///
+         caption("Fuente: BCCR") ///
+         xtitle(" ") /// 
+         ylabel(#6, angle(0)) ///
+         xlabel(, format(%tm_m-y)) ///
+         lcolor("145 168 208") ///
+         graphregion(color(white)) ///
+         plotregion(fcolor(white) ifcolor(white)) ///
+         lcolor( "18 130 162" "187 62 3")
+
+graph export "gph/ipc_inflation.png", replace
 
 tsline `inflation', ///
          title("Índice de Precios Costa Rica", `optiontitles') ///
@@ -68,9 +81,9 @@ tsline `inflation', ///
          lcolor("145 168 208") ///
          graphregion(color(white)) ///
          plotregion(fcolor(white) ifcolor(white)) ///
-         lcolor("10 17 40" "18 130 162" "187 62 3")
+         lcolor( "18 130 162" "187 62 3")
 		 
-graph export ipc_inflation.png, replace
+graph export "gph/ipc_inflation2.png", replace
 
 clear 
 
@@ -97,3 +110,5 @@ tsline Value, ///
          graphregion(color(white)) ///
          plotregion(fcolor(white) ifcolor(white)) ///
          lcolor("18 130 162")
+
+graph export "gph/USipc_inflation.png", replace
