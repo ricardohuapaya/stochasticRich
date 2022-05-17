@@ -68,6 +68,32 @@ tsline `inflation', ///
          lcolor("145 168 208") ///
          graphregion(color(white)) ///
          plotregion(fcolor(white) ifcolor(white)) ///
-         lcolor("10 17 40" "18 130 162" "187 62 3") ///
-         saving("gph/ipc_cr.png", replace)
+         lcolor("10 17 40" "18 130 162" "187 62 3")
+		 
+graph export ipc_inflation.png, replace
 
+clear 
+
+import excel "datasets/bls_ipc.xlsx", cellrange(A12:D136) firstrow clear
+
+generate date = tm(2012m1) +_n-1
+
+tsset date, monthly
+
+drop SeriesID Year Period
+
+label var Value "IPC"
+
+
+tsline Value, ///
+         title("Índice de Precios Estados Unidos", `optiontitles') ///
+         subtitle("Variación Interanual (%), 2012-2022", `optiontitles') ///
+         caption("Fuente: BLS") ///
+         xtitle(" ") ///
+		 ytitle(" ") ///
+         ylabel(#6, angle(0)) ///
+         xlabel(, format(%tm_m-y)) ///
+         lcolor("145 168 208") ///
+         graphregion(color(white)) ///
+         plotregion(fcolor(white) ifcolor(white)) ///
+         lcolor("18 130 162")
